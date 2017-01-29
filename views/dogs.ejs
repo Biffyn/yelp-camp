@@ -1,0 +1,17 @@
+<% include partials/header %>
+<div class="container">
+    <h1>Dogs</h1>
+
+    <% dogs.forEach(function(dog){ %>
+        <div class="row">
+            <div class="col-xs-12 col-md-4">
+                <h3><%= dog.name %></h3>
+                <img src="<%= dog.image %>">
+            </div> 
+        </div>
+    <% }); %>
+
+    <a href="/home">Home</a>   
+</div>
+
+<% include partials/footer %>

@@ -1,18 +1,33 @@
 var express     = require("express"),
     app         = express(),
-    bodyParser  = require("body-parser");
+    bodyParser  = require("body-parser"),
+    mongoose    = require("mongoose");
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
+mongoose.connect("mongodb://localhost/yelp_camp");
 
-// ***Tempory Campground Array***
+// ***Schema Setup***
 
-var campgrounds = [
-    {name: "Blue Lake", image: "http://www.photosforclass.com/download/1407082722"},
-    {name: "Big Wood", image: "http://www.photosforclass.com/download/8737935921"},
-    {name: "Great Peak View", image: "http://www.photosforclass.com/download/8707814671"},
-    {name: "Everest View", image: "http://www.photosforclass.com/download/6381606819"}
-];
+var campgroundSchema = new mongoose.Schema({
+    name: String,
+    image: String
+});
+
+var Campground = mongoose.model("Campground", campgroundSchema);
+
+// Campground.create(
+//     {name: "Everest View", 
+//     image: "http://www.photosforclass.com/download/6381606819"
+        
+//     }, function(err, campground){
+//         if (err){
+//             console.log(err);
+//         } else {
+//             console.log("New Campground Created");
+//             console.log(campground);
+//         }
+//     });
 
 // ***ROUTES***
 
@@ -23,7 +38,13 @@ app.get("/", function(req, res){
 
 // campgrounds
 app.get("/campgrounds", function(req, res){
-    res.render("campgrounds", {campgrounds:campgrounds});
+    Campground.find({}, function(err, campgrounds){
+       if (err) {
+            console.log(err);
+       } else {
+            res.render("campgrounds", {campgrounds:campgrounds});  
+       }
+    });
 });
 
 app.get("/campgrounds/new", function(req, res) {
@@ -35,9 +56,15 @@ app.post("/campgrounds", function(req, res){
     var name = req.body.name;
     var image = req.body.image;
     var newCampground = {name: name, image: image};
-    campgrounds.push(newCampground);
-    // redirect
-    res.redirect("/campgrounds");
+    // Create a new campground and save to db
+    Campground.create(newCampground, function(err, newlyCreated){
+        if (err) {
+            console.log(err);
+        } else {
+            // redirect
+            res.redirect("/campgrounds");    
+        }
+    });
 });
 
 app.listen(process.env.PORT, process.env.IP, function(){

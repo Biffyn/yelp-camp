@@ -1,15 +1,49 @@
 <% include partials/header %>
 <div class="container">
-    <h1>Create A New Campground</h1>
-
-    <% campgrounds.forEach(function(campground){ %>
-        <div class="row">
-            <div class="col-xs-12 col-md-4">
-                <h3><%= campground.name %></h3>
-                <img src="<%= campground.image %>">
+    <div class="jumbotron">
+        <h1>Welcome To YelpCamp </h1>
+        <p>Veiw campgrounds from all over the world as choosen by you</p>
+        <p>
+            <a href="/campgrounds/new" class="ui blue large button">
+                Add New Campground
+            </a>
+        </p>
+    </div>
+    <div class="row" style="display: flex; flex-wrap: wrap;">
+        <% campgrounds.forEach(function(campground){ %>
+            <div class="col-md-3 col-sm-6">
+                <div class="ui centered cards">
+                    <div class="card">
+                        <div class="image">
+                            <img src="<%= campground.image %>">
+                        </div>
+                        <div class="content">
+                        <div class="header"><%= campground.name %></div>
+                        <div class="meta">
+                            <a>Woodland</a>
+                        </div>
+                        <div class="description">
+                            It is awesome... but no WIFI?
+                        </div>
+                        </div>
+                        <!--<div class="extra">-->
+                        <!--    Rating:-->
+                        <!--    <div class="ui star rating" data-rating="4"></div>-->
+                        <!--</div>-->
+                        <div class="extra content">
+                            <span class="right floated">
+                                Added in 2013
+                            </span>
+                            <span>
+                                <i class="user icon"></i>
+                                    75 Visited
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div> 
-        </div>
-    <% }); %>
+        <% }); %>
+    </div>
 </div>
 
 <% include partials/footer %>

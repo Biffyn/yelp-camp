@@ -1,0 +1,24 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Biffyn/yelp-camp.git"
+  },
+  "author": "Jame Richards",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Biffyn/yelp-camp/issues"
+  },
+  "homepage": "https://github.com/Biffyn/yelp-camp#readme",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "ejs": "^2.5.5",
+    "express": "^4.14.1"
+  }
+}

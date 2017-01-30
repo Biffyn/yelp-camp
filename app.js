@@ -11,23 +11,11 @@ mongoose.connect("mongodb://localhost/yelp_camp");
 
 var campgroundSchema = new mongoose.Schema({
     name: String,
-    image: String
+    image: String,
+    description: String
 });
 
 var Campground = mongoose.model("Campground", campgroundSchema);
-
-// Campground.create(
-//     {name: "Everest View", 
-//     image: "http://www.photosforclass.com/download/6381606819"
-        
-//     }, function(err, campground){
-//         if (err){
-//             console.log(err);
-//         } else {
-//             console.log("New Campground Created");
-//             console.log(campground);
-//         }
-//     });
 
 // ***ROUTES***
 
@@ -36,35 +24,53 @@ app.get("/", function(req, res){
     res.render("home");
 });
 
-// campgrounds
+// INDEX - show all campgrounds
 app.get("/campgrounds", function(req, res){
     Campground.find({}, function(err, campgrounds){
        if (err) {
             console.log(err);
        } else {
-            res.render("campgrounds", {campgrounds:campgrounds});  
+            res.render("index", {campgrounds:campgrounds});  
        }
     });
 });
 
+// CREATE - add new campground to db
 app.get("/campgrounds/new", function(req, res) {
     res.render("new");
 });
 
+// NEW - show form to create new campground
 app.post("/campgrounds", function(req, res){
-    // get data from form and add to array
+    // get data from form
     var name = req.body.name;
     var image = req.body.image;
-    var newCampground = {name: name, image: image};
+    var desc = req.body.description;
+    var newCampground = {name: name, image: image, description: desc};
     // Create a new campground and save to db
     Campground.create(newCampground, function(err, newlyCreated){
         if (err) {
             console.log(err);
         } else {
             // redirect
-            res.redirect("/campgrounds");    
+            res.redirect("/campgrounds");
         }
     });
+});
+
+// SHOW - shows more info about one campground
+app.get("/campgrounds/:id", function(req, res) {
+    //find the capmground with provided ID
+    Campground.findById(req.params.id, function(err, foundCampground){
+        if (err) {
+            console.log(err);
+        } else {
+            //render show template
+            res.render("show", {campground: foundCampground}); 
+        }
+    });
+    
+    
 });
 
 app.listen(process.env.PORT, process.env.IP, function(){

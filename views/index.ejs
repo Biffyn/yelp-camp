@@ -18,12 +18,14 @@
                             <img src="<%= campground.image %>">
                         </div>
                         <div class="content">
-                        <div class="header"><%= campground.name %></div>
+                        <div class="header">
+                            <%= campground.name %>
+                        </div>
                         <div class="meta">
-                            <a>Woodland</a>
+                            <a href="/campgrounds/<%= campground._id %>">More Info</a>
                         </div>
                         <div class="description">
-                            It is awesome... but no WIFI?
+                            <%= campground.description %>
                         </div>
                         </div>
                         <!--<div class="extra">-->

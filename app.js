@@ -24,14 +24,14 @@ app.get("/campgrounds", function(req, res){
        if (err) {
             console.log(err);
        } else {
-            res.render("index", {campgrounds:campgrounds});  
+            res.render("campgrounds/index", {campgrounds:campgrounds});  
        }
     });
 });
 
 // CREATE - add new campground to db
 app.get("/campgrounds/new", function(req, res) {
-    res.render("new");
+    res.render("campgrounds/new");
 });
 
 // NEW - show form to create new campground
@@ -61,12 +61,48 @@ app.get("/campgrounds/:id", function(req, res) {
         } else {
             console.log(foundCampground);
             //render show template with that campground
-            res.render("show", {campground: foundCampground});
+            res.render("campgrounds/show", {campground: foundCampground});
         }
     });
-    
-    
 });
+
+// COMMENTS ROUTES
+
+// new
+app.get("/campgrounds/:id/comments/new", function(req, res){
+    // find campground id
+    Campground.findById(req.params.id, function(err, campground){
+        if (err){
+            console.log(err);
+        } else {
+            res.render("comments/new", {campground: campground});    
+        }
+    });
+});
+
+// create
+app.post("/campgrounds/:id/comments", function(req, res){
+   // find campground using id
+   Campground.findById(req.params.id, function(err, campground){
+        if (err){
+            console.log(err);
+            res.redirect("/campgrounds");
+        } else {
+            // create new comment 
+            Comment.create(req.body.comment, function(err, comment){
+                if (err) {
+                    console.log(err);
+                } else {
+                    campground.comments.push(comment);
+                    campground.save();
+                    // redirect
+                    res.redirect("/campgrounds/" + campground._id);
+                }
+            });
+        }
+   });
+});
+
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("The Yelp Camp Server Is Running");

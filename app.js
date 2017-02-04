@@ -9,6 +9,7 @@ var express     = require("express"),
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 mongoose.connect("mongodb://localhost/yelp_camp");
+app.use(express.static(__dirname + "/public"));
 seedDB();
 
 // ***ROUTES***

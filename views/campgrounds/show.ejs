@@ -1,19 +1,74 @@
 <% include ../partials/header %>
 
-<h1><%= campground.name %></h1>
-
-<img src="<%= campground.image %>">
-
-<p><%= campground.description %></p>
-
-<p>
-    <a class="ui inverted green small button" href="/campgrounds/<%= campground._id %>/comments/new %>" >New Comment</a>
-</p>
-
-<% campground.comments.forEach(function(comment){ %>
-    <p>
-        <strong><%= comment.author %></strong> - <%= comment.text %>
-    </p>
-<% }) %>
+<div class="ui container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead"><%=campground.name%></p>
+            <div class="list-group">
+                <li class="list-group-item active">Info 1</li>
+                <li class="list-group-item">Info 2</li>
+                <li class="list-group-item">Info 3</li>
+            </div>    
+        </div>
+        <div class="col-md-9">
+            <div id="content" class="ui raised segment">
+                <img class="ui fluid image" src="<%= campground.image %>">
+                <div class="caption-full">
+                    <h4 class="pull-right">$9.00/night</h4>
+                    <h4><a><%=campground.name%></a></h4>
+                    <p><%= campground.description %></p>
+                </div>
+            </div>
+            <div class="ui secondary segment">
+                <h2 class="ui header">
+                    <div class="content">
+                        <i class="comment outline icon"></i>
+                        Join The Discussion
+                    </div>
+                </h2>
+                <div class="text-right">
+                    <a class="ui primary submit labeled icon button" href="/campgrounds/<%= campground._id %>/comments/new">
+                      <i class="icon edit"></i> Add Comment
+                    </a>
+                </div>
+                <hr>
+                <% campground.comments.forEach(function(comment){ %>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="ui comments">
+                                    <div class="ui raised segment">
+                                        <div class="comment">
+                                            <a class="avatar">
+                                              <img src="/images/avatar/small/elliot.jpg">
+                                            </a>
+                                            <div class="content">
+                                                <a class="author" ><%= comment.author %></a>
+                                                <div class="metadata">
+                                                    <span class="date">Today at 5:42PM</span>
+                                                </div>
+                                                <div class="text">
+                                                    <%= comment.text %> 
+                                                </div>
+                                                <div class="actions">
+                                                    <a class="reply">Reply</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form class="ui reply form hidden">
+                                        <div class="field">
+                                          <textarea></textarea>
+                                        </div>
+                                        <div class="ui blue labeled submit icon button">
+                                          <i class="icon edit"></i> Add Reply
+                                        </div>
+                                    </form>
+                                </div>
+                        </div>
+                    </div>
+                <% }) %>
+        </div>
+    </div>
+</div>
 
 <% include ../partials/footer %>

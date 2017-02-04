@@ -15,13 +15,22 @@
             <a href="/" class="active item">Home</a>
             <a href="/campgrounds" class="item">Campgrounds</a>
             <a href="/campgrounds/new" class="item">Add New Campground</a>
-        <div class="right menu">
-            <div class="item">
-                <div class="ui inverted button">Log In</div>
-            </div>
-            <div class="item">
-                <div class="ui inverted blue button">Sign Up</div>
-            </div>
-        </div>    
+            <div class="right menu">
+                <% if(!currentUser){ %>
+                    <div class="item">
+                        <a href="/login" class="ui inverted basic tiny button">Log In</a>
+                    </div>
+                    <div class="item">
+                        <a href="/register" class="ui tiny teal button">Sign Up</a>
+                    </div>
+                <% } else { %>
+                    <div class="item">
+                        <a href="#">Signed In As <%= currentUser.username %></a>
+                    </div>
+                    <div class="item">
+                        <a href="/logout">Logout</a>
+                    </div>
+                <% } %>    
+            </div>    
         </div>
     </div>

@@ -5,7 +5,7 @@ var express     = require("express"),
 
 //root route
 router.get("/", function(req, res){
-    res.render("landing");
+    res.render("home");
 });
 
 // show register form

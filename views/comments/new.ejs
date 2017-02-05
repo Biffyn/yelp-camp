@@ -1,15 +1,12 @@
 <% include ../partials/header %>
 
-<div class="container">
+<div class="ui container">
     <h1>Add A New Comment to <%= campground.name %></h1>
-    <form class="ui form" action="/campgrounds/<%= campground._id %>/comments" method="POST">
-        <div class="field">
-            <label>Author:</label>
-            <input type="text" name="comment[author]" placeholder="name">
-        </div>
+    <form class="ui large form" action="/campgrounds/<%= campground._id %>/comments" method="POST">
         <div class="field">
             <label>Comment:</label>
-            <input type="text" name="comment[text]" placeholder="comment">
+            <textarea rows="2" name="comment[text]" placeholder="comment"></textarea>
+            <!--<input type="text" name="comment[text]" placeholder="comment">-->
         </div>
         <button class="ui inverted blue button" type="submit">Submit</button>
     </form>

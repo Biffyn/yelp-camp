@@ -1,22 +1,30 @@
 <% include ../partials/header %>
 
-<div class="container">
-    <h1>Add A New Campground</h1>
-    <form class="ui form" action="/campgrounds" method="POST">
-        <div class="field">
-            <label>Campground Name:</label>
-            <input type="text" name="name" placeholder="campground name">
-        </div>
-        <div class="field">
-            <label>Campground Description:</label>
-            <input type="text" name="description" placeholder="campground description">
-        </div>
-        <div class="field">
-            <label>Campground Image:</label>
-            <input type="text" name="image" placeholder="add image URL">
-        </div>
-        <button class="ui inverted blue button" type="submit">Submit</button>
-    </form>
+<div class="ui container">
+    <div class="ui raised segment">
+        <h1 class="ui green image header">
+          <!--<img src="assets/images/logo.png" class="image">-->
+          <div class="content">
+                <i class="tree icon"></i>
+                Add A New Campground
+          </div>
+        </h1>
+        <form class="ui form" action="/campgrounds" method="POST">
+            <div class="field">
+                <label>Campground Name:</label>
+                <input type="text" name="name" placeholder="campground name">
+            </div>
+            <div class="field">
+                <label>Campground Description:</label>
+                <textarea type="text" name="description" placeholder="campground description" rows="3"></textarea>
+            </div>
+            <div class="field">
+                <label>Campground Image:</label>
+                <input type="text" name="image" placeholder="add image URL">
+            </div>
+            <button class="ui teal large button" type="submit">Submit</button>
+        </form>
+    </div>
 </div>
 
 <% include ../partials/footer %>

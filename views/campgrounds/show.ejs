@@ -21,6 +21,12 @@
                         <em>Submitted By:</em> <%= campground.author.username %>
                     </p>
                 </div>
+                <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+                    <a class="ui tiny orange button" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
+                    <form id="delete-form" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+                        <button class="ui red orange button">Delete</button>
+                    </form>
+                <% } %>
             </div>
             <div class="ui secondary segment">
                 <h2 class="ui header">
@@ -53,6 +59,10 @@
                                                     <%= comment.text %> 
                                                 </div>
                                                 <div class="actions">
+                                                    <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                                        <a class="reply" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
+                                                        <a id="reply" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">Delete</a>
+                                                    <% } %>
                                                     <a class="reply">Reply</a>
                                                 </div>
                                             </div>

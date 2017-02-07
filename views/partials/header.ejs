@@ -34,3 +34,19 @@
             </div>    
         </div>
     </div>
+    <div id="alert" class="ui container">
+        <% if(error && error.length > 0){ %>
+            <div class="ui error message" role="alert">
+                <div class="header">
+                   <h3><%= error %></h3> 
+                </div>
+            </div>
+        <% } %>
+        <% if(success && success.length > 0){ %>
+            <div class="ui success message" role="alert">
+                <div class="header">
+                    <h3><%= success %></h3>  
+                </div>
+            </div>
+        <% } %>
+    </div>

@@ -1,5 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Montserrat');
+
 body {
     background-color: #f9f9f9;
+}
+
+#nav {
+    border-radius: 0;
+}
+
+#logo {
+    font-family: 'Indie Flower', cursive;
 }
 
 #content {
@@ -17,4 +28,18 @@ body {
 #alert {
     margin-top: 1.5em;
     margin-bottom: 1.5em;
+}
+
+@media screen and (min-width: 768px) {
+
+    .form-wrapper {
+        width: 50%; 
+        margin: 25px auto; 
+    }
+    
+    #alert {
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+    }
+    
 }

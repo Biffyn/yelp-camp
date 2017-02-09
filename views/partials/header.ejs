@@ -11,24 +11,24 @@
     <title>Yelp Camp</title>
 </head>
 <body>
-    <div class="ui large inverted menu">
+    <div id="nav" class="ui secondary large menu">
         <div class="container">
-            <a href="/" class="active item">Home</a>
-            <a href="/campgrounds" class="item">Campgrounds</a>
-            <a href="/campgrounds/new" class="item">Add New Campground</a>
+            <div class="header item">
+                <h1 id="logo">YelpCamp</h1>
+            </div>
             <div class="right menu">
                 <% if(!currentUser){ %>
                     <div class="item">
-                        <a href="/login" class="ui inverted basic tiny button">Log In</a>
+                        <a href="/login" class="ui black basic tiny button">Log In</a>
                     </div>
-                    <div class="item">
+                    <div class="vertically fitted item">
                         <a href="/register" class="ui tiny teal button">Sign Up</a>
                     </div>
                 <% } else { %>
                     <div class="item">
                         <a href="#">Signed In As <%= currentUser.username %></a>
                     </div>
-                    <div class="item">
+                    <div class="vertically fitted item">
                         <a href="/logout">Logout</a>
                     </div>
                 <% } %>    
